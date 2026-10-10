@@ -1,0 +1,38 @@
+{
+    "perfil": {
+        "nivel_general": "intermedio",
+        "puntaje_global": 56.67,
+        "areas": [
+            {
+                "codigo": "OFI",
+                "nombre_area": "Ofimática",
+                "puntaje": 41.67,
+                "nivel": "basico"
+            },
+            {
+                "codigo": "RED",
+                "nombre_area": "Redes e Internet",
+                "puntaje": 58.33,
+                "nivel": "intermedio"
+            },
+            {
+                "codigo": "SEG",
+                "nombre_area": "Ciberseguridad",
+                "puntaje": 83.33,
+                "nivel": "avanzado"
+            },
+            {
+                "codigo": "COL",
+                "nombre_area": "Colaboración digital",
+                "puntaje": 66.67,
+                "nivel": "intermedio"
+            },
+            {
+                "codigo": "PRO",
+                "nombre_area": "Productividad digital",
+                "puntaje": 33.33,
+                "nivel": "basico"
+            }
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "evaluacion": {
+        "modulo": "Hojas de cálculo: fórmulas y funciones",
+        "area": "Ofimática",
+        "nivel": "intermedio",
+        "calificacion": 50,
+        "aprobado": false,
+        "intento": 1,
+        "max_intentos": 3,
+        "temas_a_reforzar": [
+            "¿Qué función cuenta las celdas que contienen números en un rango?",
+            "¿Qué herramienta resalta automáticamente las celdas que cumplen una condición?"
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+@include('errors.plantilla', ['codigo' => 419, 'titulo' => 'La página expiró', 'mensaje' => 'Su sesión expiró por seguridad. Actualice la página e intente nuevamente; si estaba respondiendo el diagnóstico, su avance está guardado.'])

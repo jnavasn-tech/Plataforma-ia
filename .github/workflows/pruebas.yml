@@ -1,0 +1,23 @@
+# Integración continua: ejecuta las pruebas automatizadas en cada envío al repositorio (Anexo R).
+name: pruebas
+on: [push, pull_request]
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, gd, zip, pdo_sqlite
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - run: vendor/bin/phpunit --testdox --log-junit junit-${{ matrix.php }}.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultados-phpunit-${{ matrix.php }}
+          path: junit-${{ matrix.php }}.xml

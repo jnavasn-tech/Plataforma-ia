@@ -1,0 +1,84 @@
+{
+    "perfil": {
+        "nivel_general": "intermedio",
+        "puntaje_global": 56.67,
+        "areas": [
+            {
+                "codigo": "OFI",
+                "nombre_area": "Ofimática",
+                "puntaje": 41.67,
+                "nivel": "basico"
+            },
+            {
+                "codigo": "RED",
+                "nombre_area": "Redes e Internet",
+                "puntaje": 58.33,
+                "nivel": "intermedio"
+            },
+            {
+                "codigo": "SEG",
+                "nombre_area": "Ciberseguridad",
+                "puntaje": 83.33,
+                "nivel": "avanzado"
+            },
+            {
+                "codigo": "COL",
+                "nombre_area": "Colaboración digital",
+                "puntaje": 66.67,
+                "nivel": "intermedio"
+            },
+            {
+                "codigo": "PRO",
+                "nombre_area": "Productividad digital",
+                "puntaje": 33.33,
+                "nivel": "basico"
+            }
+        ]
+    },
+    "puesto_objetivo": "Auxiliar administrativo",
+    "catalogo_modulos": [
+        {
+            "id_modulo": 1,
+            "area": "OFI",
+            "nombre": "Documentos y presentaciones básicas",
+            "nivel": "basico"
+        },
+        {
+            "id_modulo": 2,
+            "area": "OFI",
+            "nombre": "Hojas de cálculo: fórmulas y funciones",
+            "nivel": "intermedio"
+        },
+        {
+            "id_modulo": 5,
+            "area": "RED",
+            "nombre": "Redes, Wi-Fi y conectividad",
+            "nivel": "intermedio"
+        },
+        {
+            "id_modulo": 11,
+            "area": "COL",
+            "nombre": "Trabajo colaborativo en la nube",
+            "nivel": "intermedio"
+        },
+        {
+            "id_modulo": 13,
+            "area": "PRO",
+            "nombre": "Archivos, carpetas y almacenamiento",
+            "nivel": "basico"
+        },
+        {
+            "id_modulo": 14,
+            "area": "PRO",
+            "nombre": "Búsqueda y evaluación de información",
+            "nivel": "intermedio"
+        }
+    ],
+    "restricciones": {
+        "max_modulos": 10,
+        "areas_obligatorias": [
+            "OFI",
+            "PRO"
+        ]
+    }
+}

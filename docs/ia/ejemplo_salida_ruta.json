@@ -1,0 +1,13 @@
+{
+    "modulos": [
+        {"id_modulo": 13, "prioridad": "alta", "justificacion": "Productividad digital obtuvo 33.33/100; este módulo fortalece la organización de archivos y el uso de la nube."},
+        {"id_modulo": 1, "prioridad": "alta", "justificacion": "Ofimática obtuvo 41.67/100; el módulo consolida el formato profesional de documentos."},
+        {"id_modulo": 2, "prioridad": "alta", "justificacion": "Complementa Ofimática con fórmulas y funciones de uso frecuente en tareas administrativas."},
+        {"id_modulo": 14, "prioridad": "alta", "justificacion": "Refuerza la búsqueda y evaluación de información, parte de la brecha de Productividad digital."},
+        {"id_modulo": 5, "prioridad": "media", "justificacion": "Redes e Internet obtuvo 58.33/100; el módulo amplía los conceptos de conectividad."},
+        {"id_modulo": 11, "prioridad": "media", "justificacion": "Colaboración digital obtuvo 66.67/100; el módulo desarrolla el trabajo en documentos compartidos."}
+    ],
+    "narrativa": "Su ruta comienza por las áreas con mayor brecha: Productividad digital y Ofimática. Luego avanzará hacia Redes e Internet y Colaboración digital. Complete los recursos de cada módulo y su evaluación; si necesita reforzar un tema, podrá repasarlo antes de un nuevo intento.",
+    "fortalezas": ["Ciberseguridad (83.33/100)"],
+    "areas_mejora": ["Productividad digital (33.33/100)", "Ofimática (41.67/100)", "Redes e Internet (58.33/100)", "Colaboración digital (66.67/100)"]
+}

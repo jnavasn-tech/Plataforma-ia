@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Entrada enviada a la IA para la retroalimentación (MinimizadorDatos::entradaRetroalimentacion)",
+    "type": "object",
+    "required": ["evaluacion"],
+    "additionalProperties": false,
+    "properties": {
+        "evaluacion": {
+            "type": "object",
+            "required": ["modulo", "area", "nivel", "calificacion", "aprobado", "intento", "max_intentos", "temas_a_reforzar"],
+            "additionalProperties": false,
+            "properties": {
+                "modulo": {"type": "string", "maxLength": 150},
+                "area": {"type": "string"},
+                "nivel": {"type": "string", "enum": ["basico", "intermedio", "avanzado"]},
+                "calificacion": {"type": "number", "minimum": 0, "maximum": 100},
+                "aprobado": {"type": "boolean"},
+                "intento": {"type": "integer", "minimum": 1},
+                "max_intentos": {"type": "integer", "minimum": 1},
+                "temas_a_reforzar": {"type": "array", "maxItems": 5, "items": {"type": "string", "maxLength": 150}}
+            }
+        }
+    }
+}

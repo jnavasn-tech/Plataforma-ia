@@ -1,0 +1,10 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Entrada enviada a la IA para interpretar el perfil (MinimizadorDatos::entradaPerfil)",
+    "type": "object",
+    "required": ["perfil"],
+    "additionalProperties": false,
+    "properties": {
+        "perfil": {"$ref": "esquema_entrada_ruta.json#/$defs/perfil"}
+    }
+}

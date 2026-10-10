@@ -1,0 +1,71 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Salida de IA: ruta",
+    "description": "Esquema validado por la plataforma (ValidadorRespuestaIA). Al proveedor se envía la versión estricta sin límites de longitud (EsquemasIA::formatoRespuesta).",
+    "type": "object",
+    "properties": {
+        "modulos": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id_modulo": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "prioridad": {
+                        "type": "string",
+                        "enum": [
+                            "alta",
+                            "media",
+                            "baja"
+                        ]
+                    },
+                    "justificacion": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 400
+                    }
+                },
+                "required": [
+                    "id_modulo",
+                    "prioridad",
+                    "justificacion"
+                ],
+                "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 15
+        },
+        "narrativa": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+        },
+        "fortalezas": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+            },
+            "maxItems": 6
+        },
+        "areas_mejora": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+            },
+            "maxItems": 6
+        }
+    },
+    "required": [
+        "modulos",
+        "narrativa",
+        "fortalezas",
+        "areas_mejora"
+    ],
+    "additionalProperties": false
+}

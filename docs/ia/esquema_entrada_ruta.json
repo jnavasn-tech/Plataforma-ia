@@ -1,0 +1,60 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Entrada enviada a la IA para generar la ruta (MinimizadorDatos::entradaRuta)",
+    "description": "Solo contiene datos pedagógicos. Nunca incluye nombre, correo, teléfono, contraseña ni identificadores del usuario.",
+    "type": "object",
+    "required": ["perfil", "puesto_objetivo", "catalogo_modulos", "restricciones"],
+    "additionalProperties": false,
+    "properties": {
+        "perfil": {"$ref": "#/$defs/perfil"},
+        "puesto_objetivo": {"type": "string", "maxLength": 120},
+        "catalogo_modulos": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["id_modulo", "area", "nombre", "nivel"],
+                "additionalProperties": false,
+                "properties": {
+                    "id_modulo": {"type": "integer", "minimum": 1},
+                    "area": {"type": "string", "enum": ["OFI", "RED", "SEG", "COL", "PRO"]},
+                    "nombre": {"type": "string", "maxLength": 150},
+                    "nivel": {"type": "string", "enum": ["basico", "intermedio", "avanzado"]}
+                }
+            }
+        },
+        "restricciones": {
+            "type": "object",
+            "required": ["max_modulos", "areas_obligatorias"],
+            "additionalProperties": false,
+            "properties": {
+                "max_modulos": {"type": "integer", "minimum": 1},
+                "areas_obligatorias": {"type": "array", "items": {"type": "string"}}
+            }
+        }
+    },
+    "$defs": {
+        "perfil": {
+            "type": "object",
+            "required": ["nivel_general", "puntaje_global", "areas"],
+            "additionalProperties": false,
+            "properties": {
+                "nivel_general": {"type": "string", "enum": ["basico", "intermedio", "avanzado"]},
+                "puntaje_global": {"type": "number", "minimum": 0, "maximum": 100},
+                "areas": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["codigo", "nombre_area", "puntaje", "nivel"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "codigo": {"type": "string"},
+                            "nombre_area": {"type": "string"},
+                            "puntaje": {"type": "number", "minimum": 0, "maximum": 100},
+                            "nivel": {"type": "string", "enum": ["basico", "intermedio", "avanzado"]}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,105 @@
+# ---------------------------------------------------------------------------
+# Arquitectura física (Capítulo IV, Figura 13; Capítulo V, sección 5.1):
+#   web   = contenedor frontend (Nginx: HTTPS/HTTP, archivos estáticos y proxy a PHP-FPM)
+#   app   = contenedor backend PHP (Laravel 10 sobre PHP-FPM 8.1)
+#   cola  = trabajador de la cola (interpretación del perfil y generación de rutas con IA)
+#   programador = tareas programadas (marca diagnósticos abandonados)
+#   db    = MySQL 8.0 (volumen persistente)
+#   mailpit = servidor SMTP de pruebas (solo perfil "dev")
+#   pruebas = ejecución de PHPUnit (solo perfil "pruebas")
+# Uso: cp .env.example .env  →  docker compose up -d --build  →  ver README.md
+# ---------------------------------------------------------------------------
+name: plataforma-competencias
+
+x-aplicacion: &aplicacion
+  build:
+    context: .
+    dockerfile: Dockerfile
+    target: aplicacion
+    args:
+      PHP_VERSION: ${PHP_VERSION:-8.1}
+  image: plataforma-competencias-app:${APP_VERSION:-1.0.0}
+  env_file: .env
+  restart: unless-stopped
+  volumes:
+    - almacenamiento:/var/www/html/storage
+  depends_on:
+    db:
+      condition: service_healthy
+  networks: [interna]
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+    image: plataforma-competencias-web:${APP_VERSION:-1.0.0}
+    restart: unless-stopped
+    ports:
+      - "${WEB_PUERTO:-8080}:80"
+    depends_on:
+      - app
+    networks: [interna]
+
+  app:
+    <<: *aplicacion
+    healthcheck:
+      test: ["CMD-SHELL", "php artisan --version > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  cola:
+    <<: *aplicacion
+    command: ["php", "artisan", "queue:work", "--tries=2", "--timeout=90", "--sleep=3"]
+
+  programador:
+    <<: *aplicacion
+    command: ["php", "artisan", "schedule:work"]
+
+  db:
+    # Versión configurable (MYSQL_VERSION). MySQL 8.0 finalizó su soporte en abril de 2026: se recomienda 8.4 LTS (hallazgo H-24).
+    image: mysql:${MYSQL_VERSION:-8.0}
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-plataforma_competencias}
+      MYSQL_USER: ${DB_USERNAME:-plataforma}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD en .env}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Defina DB_ROOT_PASSWORD en .env}
+      TZ: America/Guatemala
+    volumes:
+      - datos_mysql:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/zz-plataforma.cnf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [interna]
+
+  # Pruebas automatizadas: docker compose --profile pruebas run --rm pruebas
+  pruebas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: pruebas
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.1}
+    profiles: ["pruebas"]
+    volumes:
+      - ./storage/logs:/var/www/html/storage/logs
+
+  mailpit:
+    image: axllent/mailpit:v1.20
+    profiles: ["dev"]
+    ports:
+      - "8025:8025"
+    networks: [interna]
+
+volumes:
+  datos_mysql:
+  almacenamiento:
+
+networks:
+  interna:

@@ -1,0 +1,8 @@
+{
+    "mensaje": "Obtuvo 50.00/100 en este primer intento. Ya domina parte del contenido; conviene reforzar el uso de funciones de conteo y el formato condicional antes de volver a intentarlo.",
+    "sugerencias": [
+        "Practique la función CONTAR con una lista de diez montos.",
+        "Aplique formato condicional para resaltar valores mayores a una meta."
+    ],
+    "siguiente_paso": "Repase los recursos del módulo y realice un nuevo intento; le quedan 2 de 3 intentos."
+}
